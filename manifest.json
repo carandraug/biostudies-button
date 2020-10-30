@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "BioStudies",
+    "name": "BioStudies button",
     "version": "0.0.1",
 
     "description": "Search the BioStudies database for data packages associated to publications.",
