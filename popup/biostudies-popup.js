@@ -55,19 +55,16 @@ function addLinkToStudy(study_acc) {
 }
 
 
-function showStudies(doi) {
+async function showStudies(doi) {
     const url = `${rest_search_url}?content="${doi}"`;
-    fetch(url).then(
-        response => response.json()
-    ).then(function(json) {
-        if (json['totalHits'] === 0)
-            reportNoDataPackage(doi);
-        else {
-            const studies_acc = json['hits'].map(x => x["accession"]);
-            for (let study_acc of studies_acc)
-                addLinkToStudy(study_acc);
-        }
-    });
+    const studies = await fetch(url).then(x => x.json());
+    if (studies['totalHits'] === 0)
+        reportNoDataPackage(doi);
+    else {
+        const studies_acc = studies['hits'].map(x => x["accession"]);
+        for (let study_acc of studies_acc)
+            addLinkToStudy(study_acc);
+    }
 }
 
 
