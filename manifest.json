@@ -8,7 +8,8 @@
     "homepage_url": "https://github.com/carandraug/biostudies-button",
 
     "icons": {
-        "48": "images/biostudies-icon.svg"
+        "48": "images/biostudies-icon.svg",
+        "96": "images/biostudies-icon.svg"
     },
 
     "permissions": [
