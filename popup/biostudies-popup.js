@@ -68,13 +68,31 @@ async function showStudies(doi) {
 }
 
 
+function searchAfterConsent(doi) {
+    // The user needs to consent to this because they might not be
+    // aware that searching on the BioStudies database requires
+    // sending "user data" (the DOI of the current page) to the
+    // database.  See rejection messages for release 0.0.1.
+    const p = document.createElement("p");
+    p.textContent = (`This will send DOI ${doi} to the BioStudies database.`
+                     + " Are you sure you want to continue?");
+    const button = document.createElement("button");
+    button.type = "button";
+    button.textContent = "Search BioStudies";
+    button.onclick = () => showStudies(doi);
+    const div = document.createElement("div");
+    div.append(p, button);
+    document.body.appendChild(div);
+}
+
+
 function receiveDOI(message, sender, sendResponse) {
     browser.runtime.onMessage.removeListener(receiveDOI);
     const doi = message.doi;
     if (doi === null)
         reportNoDOI();
     else
-        showStudies(doi);
+        searchAfterConsent(doi);
 }
 
 
